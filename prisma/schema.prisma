@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+
+model FlightData {
+  id          Int      @id @default(autoincrement())
+  flight      String
+  created     DateTime @default(now())
+  updated     DateTime @updatedAt
+  station     Station  @relation(fields: [stationId], references: [id])
+  stationId   Int
+}
+
+
+model Station {
+
+  id        Int      @id @default(autoincrement())
+  name      String
+  latitude  Float
+  longitude Float
+  altitude  Float
+  timezone  String
+  created   DateTime @default(now())
+  updated   DateTime @updatedAt
+  flights   FlightData[]
+}
