@@ -11,14 +11,25 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-
 model FlightData {
-  id          Int      @id @default(autoincrement())
-  flight      String
+  id             Int      @id @default(autoincrement())
+  contact        String
+  station        Station  @relation(fields: [stationId], references: [id])
+  stationId      Int
+  stationHeight  String
+  latitude       String
+  longitude      String
+  flightNum      String
+  launchDate     String
+  launchTime     String
+  radiosondeType String
+  radiosondeNum  String
+  O3SondeId      String
+  totalO3        String
+  dataResolution String
+  data        Json
   created     DateTime @default(now())
   updated     DateTime @updatedAt
-  station     Station  @relation(fields: [stationId], references: [id])
-  stationId   Int
 }
 
 
@@ -26,10 +37,6 @@ model Station {
 
   id        Int      @id @default(autoincrement())
   name      String
-  latitude  Float
-  longitude Float
-  altitude  Float
-  timezone  String
   created   DateTime @default(now())
   updated   DateTime @updatedAt
   flights   FlightData[]
