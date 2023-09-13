@@ -1,15 +1,10 @@
 import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
 
-export async function insertData(): Promise<void> {
-  const client = await pool.connect();
+export async function insertData(data): Promise<void> {
+  const prisma = new PrismaClient();
 
   try {
-    // Your SQL INSERT statement here to insert 'header' and 'data' into the database.
-    // You'll need to create a table and define the INSERT statement accordingly.
-    // Example:
-    // const insertQuery = 'INSERT INTO your_table (header_column, data_column) VALUES ($1, $2)';
-    // await client.query(insertQuery, [header.join(','), data.join(',')]);
+    const result = await prisma.
   } finally {
     client.release();
   }

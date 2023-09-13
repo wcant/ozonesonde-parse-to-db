@@ -1,5 +1,9 @@
 // fileTests.ts
-import { readSondeFile, SondeData } from "./readFileUtils.ts";
+import {
+  readSondeFile,
+  SondeData,
+  extractL100HeaderInfo,
+} from "./readFileUtils.ts";
 
 type TestResult = {
   passed: boolean;
@@ -17,9 +21,10 @@ describe("Tests100mHeaders", () => {
     );
   });
 
-  afterAll(async () => {
-    // insert data into database
-    return console.log(fileData.data);
+  afterAll(() => {
+    if (process.exitCode === 0) {
+      console.log(extractL100HeaderInfo(fileData.header));
+    }
   });
 
   it('check if line 14 contains "PI Contact Info"', () => {

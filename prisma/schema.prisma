@@ -6,16 +6,16 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model FlightData {
-  id             Int      @id @default(autoincrement())
+model L100FlightData {
+  id             String   @id @default(uuid())
   contact        String
   station        Station  @relation(fields: [stationId], references: [id])
-  stationId      Int
+  stationId      String
   stationHeight  String
   latitude       String
   longitude      String
@@ -27,17 +27,72 @@ model FlightData {
   O3SondeId      String
   totalO3        String
   dataResolution String
-  data        Json
-  created     DateTime @default(now())
-  updated     DateTime @updatedAt
+  data           Json
+  created        DateTime @default(now())
+  updated        DateTime @updatedAt
 }
 
+model RawFlightData {
+  id                        String   @id @default(uuid())
+  station                   Station  @relation(fields: [stationId], references: [id])
+  stationId                 String
+  headerLines               String
+  dataColumns               String
+  flightNumber              String
+  dateGMT                   String
+  timeGMT                   String
+  location                  String
+  longitude                 String
+  latitude                  String
+  launchAltitudeKm          String
+  surfacePressureMb         String
+  surfaceTempDeg            String
+  surfaceHumidity           String
+  trop1AltitudeKm           String
+  trop2AltitudeKm           String
+  turnAltitudeKm            String
+  turnPressureMb            String
+  radiosondeNumber          String
+  humicapSensor             String
+  radiationCorrection       String
+  pressureSensorOffset      String
+  geomPressOffsetCorr       String
+  radiosondeTotalColWater   String
+  instrumentType            String
+  originalFileSource        String
+  ozoneSondeNumber          String
+  solution                  String
+  oltmansSolutionCorrection String
+  oltmansTermA              String
+  oltmansTermB              String
+  ozonePumpTempCorrection   String
+  totalOzoneColumnCMR       String
+  totalOzoneColumnSBUV      String
+  totalOzoneStopPressure    String
+  timeToPump100Ml           String
+  dryFlowrateCorrection     String
+  cellBackgroundIB2         String
+  backgroundCurrent         String
+  coefficients              String
+  pumpCoefficientPC0        String
+  pumpCoefficientPC1        String
+  pumpCoefficientPC2        String
+  pumpCoefficientPC3        String
+  adSystem                  String
+  flowrateCorrType          String
+  pressureDataSource        String
+  altitudeDataSource        String
+  geoAltAnchoringMethod     String
+  data                      Json
+  created                   DateTime @default(now())
+  updated                   DateTime @updatedAt
+}
 
 model Station {
-
-  id        Int      @id @default(autoincrement())
-  name      String
-  created   DateTime @default(now())
-  updated   DateTime @updatedAt
-  flights   FlightData[]
+  id             String           @id @default(uuid())
+  name           String
+  created        DateTime         @default(now())
+  updated        DateTime         @updatedAt
+  L100FlightData L100FlightData[]
+  RawFlightData  RawFlightData[]
 }
