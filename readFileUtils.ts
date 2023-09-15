@@ -4,6 +4,7 @@ import { L100Entry } from "./types.ts";
 import {
   parseMixedSondeLines,
   parseColumnNamesAndUnits,
+  parseLaunchTime,
 } from "./utils/index.ts";
 
 export type SondeData = {
@@ -98,18 +99,17 @@ export function extractL100HeaderInfo(header: string[]) {
   const longitude = header[18].split(":")[1].trim();
   const flightNumber = header[19].split(":")[1].trim();
   const launchDate = header[20].split(":")[1].trim();
-  const launchTime = header[21].split(":").shift().join(":").trim();
+  const launchTime = parseLaunchTime(header[21]);
   const radiosondeType = header[22].split(":")[1].trim();
   const radiosondeNumber = header[23].split(":")[1].trim();
 
-  const [o3SondeId, background, flowrate, rhCorr] = parseMixedSondeInfo(
+  const [o3SondeId, background, flowrate, rhCorr] = parseMixedSondeLines(
     header[24]
-  ).values();
-  const [sondeTotalO3DU, sondeTotalO3SBUV] = parseMixedSondeInfo(
-    header[25]
-  ).values();
+  );
+  const [sondeTotalO3DU, sondeTotalO3SBUV] = parseMixedSondeLines(header[25]);
 
-  const { columnNames, columnUnits } = parseColumnNamesAndUnits();
+  const columnNames = parseColumnNamesAndUnits(header[27]);
+  const columnUnits = parseColumnNamesAndUnits(header[28]);
 
   return {
     contact,
@@ -133,6 +133,6 @@ export function extractL100HeaderInfo(header: string[]) {
   };
 }
 
-export function createDATEntry({ header, data }) {}
+// export function createDATEntry({ header, data }) {}
 
-export function extractDATHeaderInfo(header) {}
+// export function extractDATHeaderInfo(header) {}
