@@ -1,13 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
-export async function insertData(data): Promise<void> {
-  const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
-  try {
-    const result = await prisma.
-  } finally {
-    client.release();
-  }
+export async function insertData(data): Promise<void> {
+  await prisma;
 }
 
 insertData()

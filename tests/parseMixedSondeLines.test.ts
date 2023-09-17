@@ -1,4 +1,4 @@
-import { parseMixedSondeLines } from "../utils/parseMixedSondeLines.ts";
+import { parseMixedSondeLines } from "../utils/parseVarsFromString.ts";
 
 const mixedSondeLines1 =
   "O3 Sonde ID    : 2Z1202   Background: 0.020 microamps (0.08 mPa)  Flowrate: 29.05 sec/100ml  RH Corr: 0.50 %";

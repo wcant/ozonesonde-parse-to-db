@@ -18,8 +18,13 @@ export type L100Entry = {
   data: {
     columnNames: string[];
     columnUnits: string[];
-    data: string[];
+    data: {};
   };
 };
 
 type DATEntry = {};
+
+export type SondeData = {
+  header: string[];
+  data: string[][];
+};
