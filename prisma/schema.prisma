@@ -14,8 +14,7 @@ datasource db {
 model L100FlightData {
   id             String   @id @default(uuid())
   contact        String
-  station        Station  @relation(fields: [stationId], references: [id])
-  stationId      String
+  station        Stations
   stationHeight  String
   latitude       String
   longitude      String
@@ -25,17 +24,19 @@ model L100FlightData {
   radiosondeType String
   radiosondeNum  String
   O3SondeId      String
-  totalO3        String
-  dataResolution String
-  data           Json
+  background     String
+  flowrate       String
+  rhCorr         String
+  sondeTotalO3DU String
+  sondeTotalO3SBUV String
+  data           Json?
   created        DateTime @default(now())
   updated        DateTime @updatedAt
 }
 
 model RawFlightData {
   id                        String   @id @default(uuid())
-  station                   Station  @relation(fields: [stationId], references: [id])
-  stationId                 String
+  station                   Stations
   headerLines               String
   dataColumns               String
   flightNumber              String
@@ -88,11 +89,15 @@ model RawFlightData {
   updated                   DateTime @updatedAt
 }
 
-model Station {
-  id             String           @id @default(uuid())
-  name           String
-  created        DateTime         @default(now())
-  updated        DateTime         @updatedAt
-  L100FlightData L100FlightData[]
-  RawFlightData  RawFlightData[]
+enum Stations {
+  Huntsville
 }
+
+// model Station {
+//   id             String           @id @default(uuid())
+//   name           String
+//   created        DateTime         @default(now())
+//   updated        DateTime         @updatedAt
+//   L100FlightData L100FlightData[]
+//   RawFlightData  RawFlightData[]
+// }

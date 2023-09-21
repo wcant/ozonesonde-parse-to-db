@@ -1,17 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma } from "@prisma/client";
+import { createL100OEntry } from "./utils/createL100DbEntry.ts";
+import { prisma } from "./utils/db.ts";
 
-const prisma = new PrismaClient();
-
-export async function insertData(data): Promise<void> {
-  await prisma;
+export async function insertData(
+  header: string[],
+  data: string[][]
+): Promise<void> {
+  const completeFlight = createL100OEntry(header, data);
+  await prisma.l100FlightData.create(completeFlight);
 }
-
-insertData()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });

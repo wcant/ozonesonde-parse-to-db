@@ -28,3 +28,7 @@ export type SondeData = {
   header: string[];
   data: string[][];
 };
+
+export enum Stations {
+  Huntsville = "Huntsville",
+}

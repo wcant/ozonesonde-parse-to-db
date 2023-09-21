@@ -3,7 +3,7 @@ import {
   readSondeFile,
   SondeData,
   extractL100HeaderInfo,
-} from "./readFileUtils.ts";
+} from "../readFileUtils.ts";
 
 type TestResult = {
   passed: boolean;
