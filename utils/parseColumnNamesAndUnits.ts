@@ -1,4 +1,4 @@
-export const parseColumnNamesAndUnits = (string: string) => {
+export const parseColumnNamesAndUnits = (string: string): string[] => {
   const columnPattern = /([^:]+)\s*:\s*([^:]+(?=.*:)|[^:]+)$/g;
 
   const result = string.match(columnPattern);

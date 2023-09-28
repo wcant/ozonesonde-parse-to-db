@@ -1,17 +1,9 @@
-export function stringContainsEnumValue(
-  inputString: string,
-  myEnum: {}
-): string {
-  // Convert enum values to an array of strings
-  const enumValues = Object.values(myEnum) as string[];
+export function stringContainsEnumValue<T extends Record<string, string>>(
+  inputString: keyof T,
+  myEnum: T
+): T[keyof T] | null {
+  // Check if the inputString is a value of the enum
+  const enumValues = Object.values(myEnum).includes(String(inputString));
 
-  let foundValue = "";
-  // Check if the inputString contains any of the enum values
-  const result = enumValues.some((enumValue) => {
-    if (inputString.includes(enumValue)) {
-      foundValue = enumValue;
-    }
-  });
-
-  return result ? foundValue : "";
+  return enumValues ? myEnum[inputString] : null;
 }

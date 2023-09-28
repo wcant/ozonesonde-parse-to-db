@@ -5,9 +5,9 @@ import {
   stringContainsEnumValue,
 } from "./index.ts";
 
-import { Stations } from "../types.ts";
+import { Stations, L100Header } from "../types.ts";
 
-export function extractL100HeaderInfo(header: string[]) {
+export function extractL100HeaderInfo(header: string[]): L100Header {
   const L100_VARNAMES_LINE_25 = [
     "O3 Sonde ID",
     "Background",
@@ -16,8 +16,12 @@ export function extractL100HeaderInfo(header: string[]) {
   ];
   const L100_VARNAMES_LINE_26 = ["Sonde Total O3", "Sonde Total O3 (SBUV)"];
 
-  const station = stringContainsEnumValue(header[15], Stations);
-  if (!station) {
+  const stationEnumValue = stringContainsEnumValue(
+    header[15] as keyof typeof Stations,
+    Stations
+  );
+
+  if (!stationEnumValue) {
     throw new TypeError("No known station found in header.");
   }
 
@@ -47,7 +51,7 @@ export function extractL100HeaderInfo(header: string[]) {
   const columnUnits = parseColumnNamesAndUnits(header[28]);
 
   return {
-    station,
+    station: stationEnumValue,
     contact,
     stationHeight,
     latitude,

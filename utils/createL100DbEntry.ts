@@ -1,8 +1,11 @@
-import { L100Entry } from "../types.ts";
 import { extractL100HeaderInfo } from "./index.ts";
 import { Prisma } from "@prisma/client";
 
-export function createL100OEntry(header: string[], data: string[][]) {
+export function createL100ODbEntry(
+  header: string[],
+  data: string[][]
+): Prisma.L100FlightDataCreateInput {
+  const stringifiedData = JSON.stringify(data);
   const {
     contact,
     station,
@@ -24,7 +27,7 @@ export function createL100OEntry(header: string[], data: string[][]) {
     columnUnits,
   } = extractL100HeaderInfo(header);
 
-  const completeFlight: Prisma.$L100FlightDataPayload = {
+  const completeFlight = {
     contact,
     station,
     stationHeight,
@@ -41,7 +44,9 @@ export function createL100OEntry(header: string[], data: string[][]) {
     rhCorr,
     sondeTotalO3DU,
     sondeTotalO3SBUV,
-    data: { columnNames, columnUnits, data },
+    columnNames,
+    columnUnits,
+    data: stringifiedData,
   };
 
   return completeFlight;

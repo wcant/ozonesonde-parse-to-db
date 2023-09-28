@@ -23,13 +23,13 @@ model L100FlightData {
   launchTime     String
   radiosondeType String
   radiosondeNum  String
-  O3SondeId      String
+  o3SondeId      String
   background     String
   flowrate       String
   rhCorr         String
   sondeTotalO3DU String
   sondeTotalO3SBUV String
-  data           Json?
+  data           String
   created        DateTime @default(now())
   updated        DateTime @updatedAt
 }

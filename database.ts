@@ -7,5 +7,5 @@ export async function insertData(
   data: string[][]
 ): Promise<void> {
   const completeFlight = createL100OEntry(header, data);
-  await prisma.l100FlightData.create(completeFlight);
+  await prisma.l100FlightData.create({ data: completeFlight });
 }

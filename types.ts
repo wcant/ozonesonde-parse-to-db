@@ -1,34 +1,26 @@
-export type L100Entry = {
+export type L100Header = {
   contact: string;
-  station: string;
+  station: Stations;
   stationHeight: string;
   latitude: string;
   longitude: string;
-  flightNumber: string;
+  flightNum: string;
   launchDate: string;
   launchTime: string;
   radiosondeType: string;
-  radiosondeNumber: string;
+  radiosondeNum: string;
   o3SondeId: string;
   background: string;
   flowrate: string;
   rhCorr: string;
   sondeTotalO3DU: string;
   sondeTotalO3SBUV: string;
-  data: {
-    columnNames: string[];
-    columnUnits: string[];
-    data: {};
-  };
-};
-
-type DATEntry = {};
-
-export type SondeData = {
-  header: string[];
-  data: string[][];
+  columnNames: string[];
+  columnUnits: string[];
 };
 
 export enum Stations {
   Huntsville = "Huntsville",
 }
+
+type DATEntry = {};
