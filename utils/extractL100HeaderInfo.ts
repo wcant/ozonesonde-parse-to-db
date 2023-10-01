@@ -22,7 +22,9 @@ export function extractL100HeaderInfo(header: string[]): L100Header {
   );
 
   if (!stationEnumValue) {
-    throw new TypeError("No known station found in header.");
+    throw new TypeError(
+      `No known station found in header. Found: "${header[15]}" instead.`
+    );
   }
 
   const contact = header[13].split(":")[1].trim();

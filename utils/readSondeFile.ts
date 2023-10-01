@@ -1,6 +1,6 @@
 import fs from "fs";
 import readline from "readline";
-import { SondeData } from "../types.ts";
+import { SondeFile } from "../types.ts";
 
 function separateDataColumns(data: string) {
   const dataColumns = data[0].split(" ").map((col) => col.trim());
@@ -10,7 +10,7 @@ function separateDataColumns(data: string) {
 export function readSondeFile(
   filename: string,
   headerLength: number
-): Promise<SondeData> {
+): Promise<SondeFile> {
   return new Promise((resolve, reject) => {
     const stream = fs.createReadStream(filename);
     const readLines = readline.createInterface({

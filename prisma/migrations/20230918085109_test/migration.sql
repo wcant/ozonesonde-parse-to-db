@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "L100FlightData" ALTER COLUMN "data" DROP NOT NULL;

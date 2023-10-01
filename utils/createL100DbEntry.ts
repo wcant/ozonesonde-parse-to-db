@@ -1,7 +1,7 @@
 import { extractL100HeaderInfo } from "./index.ts";
 import { Prisma } from "@prisma/client";
 
-export function createL100ODbEntry(
+export function createL100DbEntry(
   header: string[],
   data: string[][]
 ): Prisma.L100FlightDataCreateInput {

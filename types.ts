@@ -1,3 +1,8 @@
+export type SondeFile = {
+  header: string[];
+  data: string[][];
+};
+
 export type L100Header = {
   contact: string;
   station: Stations;

@@ -7,14 +7,13 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url       = env("POSTGRES_LOCAL_URL") // uses connection pooling
 }
 
 model L100FlightData {
   id             String   @id @default(uuid())
   contact        String
-  station        Stations
+  station        String
   stationHeight  String
   latitude       String
   longitude      String
@@ -36,7 +35,7 @@ model L100FlightData {
 
 model RawFlightData {
   id                        String   @id @default(uuid())
-  station                   Stations
+  station                   String
   headerLines               String
   dataColumns               String
   flightNumber              String
@@ -87,10 +86,6 @@ model RawFlightData {
   data                      Json
   created                   DateTime @default(now())
   updated                   DateTime @updatedAt
-}
-
-enum Stations {
-  Huntsville
 }
 
 // model Station {

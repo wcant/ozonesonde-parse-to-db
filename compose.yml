@@ -1,6 +1,6 @@
 services:
   postgres:
-    container_name: postgres
+    container_name: ozonesonde-postgres
     image: postgres:latest
     environment:
       - POSTGRES_USER=${POSTGRES_USER_LOCAL}
@@ -10,12 +10,12 @@ services:
       - "5432:5432"
     restart: always
 
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4:latest
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL_LOCAL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW_LOCAL}
-    ports:
-      - "5050:80"
-    restart: always
+  # pgadmin:
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4:latest
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL_LOCAL}
+  #     - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW_LOCAL}
+  #   ports:
+  #     - "5050:80"
+  #   restart: always
