@@ -4,5 +4,5 @@ import { Stations } from "../types.ts";
 test("String contains value in Stations enum", () => {
   const myString = "Station        : Huntsville, AL";
   const containsEnumValue = stringContainsEnumValue(myString, Stations);
-  expect(containsEnumValue).toBe(true);
+  expect(containsEnumValue).toBeTruthy();
 });

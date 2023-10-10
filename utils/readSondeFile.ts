@@ -22,6 +22,8 @@ export function readSondeFile(
     const header: string[] = [];
     const data: string[][] = [];
 
+    console.log(filename);
+
     let count = 1;
     readLines
       .on("line", (line: string) => {

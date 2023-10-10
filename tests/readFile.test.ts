@@ -1,18 +1,10 @@
 // fileTests.ts
-import {
-  readSondeFile,
-  SondeData,
-  extractL100HeaderInfo,
-} from "../readFileUtils.ts";
+import { readSondeFile, extractL100HeaderInfo } from "../utils/index.ts";
 
-type TestResult = {
-  passed: boolean;
-  message: string;
-  data: string[];
-};
+import { SondeFile } from "../types.ts";
 
 describe("Tests100mHeaders", () => {
-  let fileData: SondeData;
+  let fileData: SondeFile;
 
   beforeAll(async () => {
     fileData = await readSondeFile(

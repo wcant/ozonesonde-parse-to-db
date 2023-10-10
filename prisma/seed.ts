@@ -20,7 +20,8 @@ async function main() {
 
   for (const file of l100Files) {
     const filePath = `${dataDir}/${file}`;
-    const { header, data } = await readSondeFile(filePath, 29);
+    let { header, data } = await readSondeFile(filePath, 29);
+    header = [...header, file];
     await insertData(header, data);
   }
 }

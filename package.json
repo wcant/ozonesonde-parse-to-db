@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "npx ts-node --esm index.ts",
-    "test": "dotenv -e .env.development -- jest",
-    "migrate": "dotenv -e .env.development -- npx prisma migrate dev"
+    "test": "jest",
+    "migrate": "npx prisma migrate dev"
   },
   "author": "Wes Cantrell",
   "license": "ISC",

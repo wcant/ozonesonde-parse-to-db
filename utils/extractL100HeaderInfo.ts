@@ -52,7 +52,10 @@ export function extractL100HeaderInfo(header: string[]): L100Header {
   const columnNames = parseColumnNamesAndUnits(header[27]);
   const columnUnits = parseColumnNamesAndUnits(header[28]);
 
+  const sourceFile = header[29];
+
   return {
+    sourceFile,
     station: stationEnumValue,
     contact,
     stationHeight,

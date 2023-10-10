@@ -1,5 +1,5 @@
 export function stringContainsEnumValue<T extends Record<string, string>>(
-  inputString: keyof T,
+  inputString: string,
   myEnum: T
 ): string | null {
   // Check if the inputString is a value of the enum

@@ -7,6 +7,7 @@ export function createL100DbEntry(
 ): Prisma.L100FlightDataCreateInput {
   const stringifiedData = JSON.stringify(data);
   const {
+    sourceFile,
     contact,
     station,
     stationHeight,
@@ -28,6 +29,7 @@ export function createL100DbEntry(
   } = extractL100HeaderInfo(header);
 
   const completeFlight = {
+    sourceFile,
     contact,
     station,
     stationHeight,

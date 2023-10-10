@@ -4,8 +4,9 @@ export type SondeFile = {
 };
 
 export type L100Header = {
+  sourceFile: string;
   contact: string;
-  station: Stations;
+  station: string;
   stationHeight: string;
   latitude: string;
   longitude: string;
